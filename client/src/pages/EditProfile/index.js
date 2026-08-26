@@ -33,7 +33,7 @@ function EditProfile() {
 
       if (user.avatarUrl) {
         setPreviewImage(
-          `${process.env.REACT_APP_API_URL || "http://localhost:5000"}${user.avatarUrl}`,
+          `${process.env.REACT_APP_IMAGE_URL || "http://localhost:5000"}${user.avatarUrl}`,
         );
       }
     } catch (error) {

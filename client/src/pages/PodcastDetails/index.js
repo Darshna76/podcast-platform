@@ -105,7 +105,7 @@ function PodcastDetailsPage() {
 
     setCurrentEpisodeIndex(index);
     setPlayingEpisode(episode);
-    setPlayingFile(`http://localhost:5000${episode.audioUrl}`);
+    setPlayingFile(`${process.env.REACT_APP_IMAGE_URL}${episode.audioUrl}`);
     setIsPlaying(true);
   };
   const playPrevious = () => {
@@ -115,7 +115,7 @@ function PodcastDetailsPage() {
 
     setCurrentEpisodeIndex(currentEpisodeIndex - 1);
     setPlayingEpisode(prev);
-    setPlayingFile(`http://localhost:5000${prev.audioUrl}`);
+    setPlayingFile(`${process.env.REACT_APP_IMAGE_URL}${prev.audioUrl}`);
   };
   const playNext = () => {
     if (currentEpisodeIndex >= episodes.length - 1) return;
@@ -124,7 +124,7 @@ function PodcastDetailsPage() {
 
     setCurrentEpisodeIndex(currentEpisodeIndex + 1);
     setPlayingEpisode(next);
-    setPlayingFile(`http://localhost:5000${next.audioUrl}`);
+    setPlayingFile(`${process.env.REACT_APP_IMAGE_URL}${next.audioUrl}`);
   };
 
   if (loading) {
@@ -146,7 +146,7 @@ function PodcastDetailsPage() {
 
           <div className="podcast-hero">
             <img
-              src={`http://localhost:5000${podcast.bannerUrl}`}
+              src={`${process.env.REACT_APP_IMAGE_URL}${podcast.bannerUrl}`}
               className="hero-banner"
               alt=""
             />
@@ -155,7 +155,7 @@ function PodcastDetailsPage() {
 
             <div className="hero-content">
               <img
-                src={`http://localhost:5000${podcast.thumbnailUrl}`}
+                src={`${process.env.REACT_APP_IMAGE_URL}${podcast.thumbnailUrl}`}
                 className="hero-thumbnail"
                 alt=""
               />
@@ -215,7 +215,7 @@ function PodcastDetailsPage() {
                     index={index + 1}
                     title={episode.title}
                     description={episode.description}
-                    audioFile={`http://localhost:5000${episode.audioUrl}`}
+                    audioFile={`${process.env.REACT_APP_IMAGE_URL}${episode.audioUrl}`}
                     isActive={playingEpisode?.id === episode.id}
                     isPlaying={isPlaying}
                     onClick={() => handlePlay(episode, index)}
@@ -223,7 +223,7 @@ function PodcastDetailsPage() {
                     onEdit={handleEditEpisode}
                     onDelete={handleDeleteEpisode}
                     duration={episode.duration}
-                  image={`http://localhost:5000${podcast.thumbnailUrl}`}
+                  image={`${process.env.REACT_APP_IMAGE_URL}${podcast.thumbnailUrl}`}
 
                   />
                 ))
@@ -245,7 +245,7 @@ function PodcastDetailsPage() {
                   {playingEpisode ? (
                     <AudioPlayer
                       audioSrc={playingFile}
-                      image={`http://localhost:5000${podcast.thumbnailUrl}`}
+                      image={`${process.env.REACT_APP_IMAGE_URL}${podcast.thumbnailUrl}`}
                       episodeTitle={playingEpisode.title}
                       onPrevious={playPrevious}
                       onNext={playNext}
@@ -257,7 +257,7 @@ function PodcastDetailsPage() {
                   ) : (
                     <div className="player-placeholder">
                       <img
-                        src={`http://localhost:5000${podcast.thumbnailUrl}`}
+                        src={`${process.env.REACT_APP_IMAGE_URL}${podcast.thumbnailUrl}`}
                         className="placeholder-img"
                         alt=""
                       />

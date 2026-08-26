@@ -26,7 +26,7 @@ const [duration, setDuration] = useState(null);
   if (editMode && episodeData) {
     setTitle(episodeData.title || "");
     setDescription(episodeData.description || "");
-    setAudioPreview(`http://localhost:5000${episodeData.audioUrl}`);
+    setAudioPreview(`${process.env.REACT_APP_IMAGE_URL}${episodeData.audioUrl}`);
   }
 }, [editMode, episodeData]);
  const handleSubmit = async () => {

@@ -38,14 +38,14 @@ function CreatePodcastForm({ editMode = false, podcastData = null }) {
 
       setDisplayImagePreview(
         podcastData.thumbnailUrl
-          ? `http://localhost:5000${podcastData.thumbnailUrl}`
-          : "",
+  ? `${process.env.REACT_APP_IMAGE_URL}${podcastData.thumbnailUrl}`
+  : ""
       );
 
       setBannerImagePreview(
-        podcastData.bannerUrl
-          ? `http://localhost:5000${podcastData.bannerUrl}`
-          : "",
+        podcastData.thumbnailUrl
+  ? `${process.env.REACT_APP_IMAGE_URL}${podcastData.thumbnailUrl}`
+  : ""
       );
     }
   }, [editMode, podcastData]);

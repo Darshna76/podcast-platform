@@ -134,7 +134,7 @@ useEffect(() => {
         <div className="podcast-image-wrapper">
           <img
             className="display-image-podcast"
-            src={"http://localhost:5000" + displayImage}
+            src={process.env.REACT_APP_IMAGE_URL + displayImage}
             alt={title}
           />
 

@@ -71,7 +71,7 @@ const handleDeletePodcast = (id) => {
                   <img
                     src={
                       user.avatarUrl
-                        ? `http://localhost:5000${user.avatarUrl}`
+                        ? `${process.env.REACT_APP_IMAGE_URL}${user.avatarUrl}`
                         : "/default-avatar.png"
                     }
                     alt={user.name}
