@@ -46,9 +46,10 @@ const start = async () => {
   try {
     await sequelize.authenticate();
     await sequelize.sync();
-app.listen(PORT, "0.0.0.0", () =>
-  console.log(`Server running on port ${PORT}`)
-);  } catch (error) {
+    app.listen(PORT, "0.0.0.0", () =>
+      console.log(`Server running on port ${PORT}`),
+    );
+  } catch (error) {
     console.error("Failed to start server", error);
     process.exit(1);
   }

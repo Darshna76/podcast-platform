@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Button from "../../components/common/Button";
 import InputComponent from "../../components/common/Input";
 import Header from "../../components/common/Header";
-// import { authService } from "../../services/auth/authService";
+import { authService } from "../../services/auth/authService";
+import "./styles.css";
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const navigate = useNavigate();
 
   const handleForgotPassword = async () => {
     if (!email) {
@@ -20,13 +21,16 @@ function ForgotPassword() {
     setLoading(true);
 
     try {
-      // Connect API here
-      // await authService.forgotPassword({ email });
-
-      setSubmitted(true);
-      toast.success("Password reset link sent successfully.");
+      const response = await authService.forgotPassword({ email });
+      sessionStorage.setItem("forgotPasswordEmail", email);
+      toast.success(response.message || "OTP sent successfully.");
+      navigate("/verify-otp", { state: { email } });
     } catch (error) {
-      toast.error(error.message || "Unable to send reset link");
+      toast.error(
+        error?.response?.data?.message ||
+          error.message ||
+          "Unable to send OTP.",
+      );
     } finally {
       setLoading(false);
     }
@@ -37,49 +41,33 @@ function ForgotPassword() {
       <Header />
 
       <div className="page">
-        <div className="page-card">
-          {!submitted ? (
-            <>
-              <h2>Forgot Password?</h2>
+        <div className="page-card auth-card">
+          <h2 className="auth-heading">Forgot Password?</h2>
 
-              <p>
-                Enter your email address and we'll send you a link to reset your
-                password.
-              </p>
+          <p className="auth-subtitle">
+            Enter your email address and we'll send you a 6-digit code to reset
+            your password.
+          </p>
 
-              <InputComponent
-                state={email}
-                setState={setEmail}
-                placeholder="Email"
-                type="email"
-                required
-              />
+          <div className="auth-form">
+            <InputComponent
+              state={email}
+              setState={setEmail}
+              placeholder="Email"
+              type="email"
+              required
+            />
 
-              <Button
-                text={loading ? "Sending..." : "Send Reset Link"}
-                onClick={handleForgotPassword}
-                disabled={loading}
-              />
+            <Button
+              text={loading ? "Sending OTP..." : "Send OTP"}
+              onClick={handleForgotPassword}
+              disabled={loading}
+            />
 
-              <Link to="/">
-                <p style={{ cursor: "pointer" }}>Back to Login</p>
-              </Link>
-            </>
-          ) : (
-            <>
-              <h2>Check Your Email</h2>
-
-              <p>
-                We've sent a password reset link to <strong>{email}</strong>.
-              </p>
-
-              <Button text="Try Again" onClick={() => setSubmitted(false)} />
-<p style={{ cursor: "pointer" }} >
-              <Link style={{color:"#ffff"}} to="/"> 
-            Back to Login
-          </Link></p>
-            </>
-          )}
+            <Link to="/" className="auth-link" style={{ color: "#fff" }}>
+              Back to Login
+            </Link>
+          </div>
         </div>
       </div>
     </>

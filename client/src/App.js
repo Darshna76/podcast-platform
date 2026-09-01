@@ -12,7 +12,9 @@ import EditProfileForm from "./pages/EditProfile";
 import EditPodcastPage from "./pages/EditPodcastPage";
 import EpisodeForm from "./pages/EpisodeForm";
 import EditEpisodePage from "./pages/EditEpisodePage";
-import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
+import ForgotPasswordPage from "./pages/ForgotPassword/ForgotPassword";
+import VerifyOtpPage from "./pages/ForgotPassword/VerifyOtpPage";
+import ResetPasswordPage from "./pages/ForgotPassword/ResetPasswordPage";
 
 function App() {
   return (
@@ -21,8 +23,10 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<SignUpPage />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-     <Route element={<PrivateRoutes />}>
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/verify-otp" element={<VerifyOtpPage />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
+          <Route element={<PrivateRoutes />}>
             <Route path="/profile" element={<Profile />} />
             <Route path="/edit-profile" element={<EditProfileForm />} />
             <Route path="/create-a-podcast" element={<CreateAPodcastPage />} />

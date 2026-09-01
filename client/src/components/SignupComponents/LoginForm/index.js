@@ -56,9 +56,9 @@ function LoginForm() {
         onClick={handleLogin}
         disabled={loading}
       />
-      <Link to="/forgot-password">
-  Forgot Password?
-</Link>
+      <Link to="/forgot-password" style={{ color: "#fff" }}>
+        Forgot Password?
+      </Link>
     </>
   );
 }

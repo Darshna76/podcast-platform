@@ -1,5 +1,4 @@
 import { authService } from "../auth.service.js";
-import { slugify } from "../../../shared/utils.js";
 
 export const register = async (req, res, next) => {
   try {
@@ -59,7 +58,7 @@ export const updateUser = async (req, res, next) => {
       : undefined;
 
     const user = await authService.updateUser({
-      id: req.user.id, // or req.user.sub if your JWT stores the id in `sub`
+      id: req.user.id,
       name: req.body.name,
       email: req.body.email,
       bio: req.body.bio,
@@ -70,6 +69,42 @@ export const updateUser = async (req, res, next) => {
       message: "Profile updated successfully",
       user,
     });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const forgotPassword = async (req, res, next) => {
+  try {
+    const result = await authService.requestPasswordReset(req.body.email);
+    res.json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const verifyOtp = async (req, res, next) => {
+  try {
+    const result = await authService.verifyPasswordResetOtp(req.body);
+    res.json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const resendOtp = async (req, res, next) => {
+  try {
+    const result = await authService.requestPasswordReset(req.body.email);
+    res.json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const resetPassword = async (req, res, next) => {
+  try {
+    const result = await authService.resetPassword(req.body);
+    res.json(result);
   } catch (error) {
     next(error);
   }

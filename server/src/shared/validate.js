@@ -1,6 +1,9 @@
 import {
   registerSchema,
   loginSchema,
+  forgotPasswordSchema,
+  otpSchema,
+  resetPasswordSchema,
   podcastSchema,
   episodeSchema,
 } from "./validation.js";
@@ -21,5 +24,8 @@ export const validate = (schema) => (req, res, next) => {
 
 export const validateRegister = validate(registerSchema);
 export const validateLogin = validate(loginSchema);
+export const validateForgotPassword = validate(forgotPasswordSchema);
+export const validateOtp = validate(otpSchema);
+export const validateResetPassword = validate(resetPasswordSchema);
 export const validatePodcast = validate(podcastSchema);
 export const validateEpisode = validate(episodeSchema);
